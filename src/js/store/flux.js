@@ -8,15 +8,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			seeCharacters: () => {
-				const store = getStore();
+			seeCharacters: async() => {
+				//const store = getStore();
 				
-				fetch('https://www.swapi.tech/api/people')
-				.then(response => { return response.json()})
-				.then(data=> {
-					setStore({...store, characters: data.results});
-				})
-				.catch(error => console.log(error));
+				// fetch('https://www.swapi.tech/api/people')
+				// .then(response => { return response.json()})
+				// .then(data=> {
+				// 	setStore({...store, characters: data.results});
+				// })
+				// .catch(error => console.log(error));
+				try{
+					const response = await fetch('https://www.swapi.dev/api/people');
+					const data = await response.json();
+					console.log(data);
+				} catch(error){
+					console.log(error);
+				}
 			},
 
 			seeCharacterDetails: (data) => {

@@ -4,32 +4,37 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 
-const CharacterCard = ({id}) => {
+const CharacterCard = () => {
 
+    const {store, actions} = useContext(Context);
+
+    useEffect(() => {
+        actions.seeCharacters()
+    }, [])
     //hacer use efecto con: https://www.swapi.tech/api/people/${id} para optener propiedades del personaje en sí
     //For image can use https://starwars-visualguide.com/assets/img/characters/${id}.jpg were the number is the id see all image in starwars-visualguide.com
     // https://starwars-visualguide.com is not an API
-    const context = useContext(Context);
+    // const context = useContext(Context);
     
-    useEffect( () => {
-        fetch(`https://www.swapi.tech/api/people/${id}`)
-		.then(response => { return response.json()})
-		.then(data=> {
-			context.actions.seeCharacterDetails(data.result);
-		})
-		.catch(error => console.log(error))
-    }, []);
+    // useEffect( () => {
+    //     fetch(`https://www.swapi.tech/api/people/${id}`)
+	// 	.then(response => { return response.json()})
+	// 	.then(data=> {
+	// 		context.actions.seeCharacterDetails(data.result);
+	// 	})
+	// 	.catch(error => console.log(error))
+    // }, []);
 
-    //Have the properties of a particular character
-    let characters = context.store.characters;
-    let character = characters.find(character => character.uid==id);
+    // //Have the properties of a particular character
+    // let characters = context.store.characters;
+    // let character = characters.find(character => character.uid==id);
     
 
-    //Have the Detail properties of a particular characterDetail
-    let charactersDetails = context.store.characterDetails;
-    console.log(charactersDetails);
-    let characterDetail = charactersDetails.find(characterDetail => characterDetail.uid==id);
-    console.log(characterDetail)
+    // //Have the Detail properties of a particular characterDetail
+    // let charactersDetails = context.store.characterDetails;
+    // console.log(charactersDetails);
+    // let characterDetail = charactersDetails.find(characterDetail => characterDetail.uid==id);
+    // console.log(characterDetail)
 
     return (
         <div className="card">
