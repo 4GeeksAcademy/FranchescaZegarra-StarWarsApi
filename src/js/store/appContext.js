@@ -22,7 +22,7 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			state.actions.seeCharacters();
+			//state.actions.seeCharacters();
 		
 			/**
 			 * 

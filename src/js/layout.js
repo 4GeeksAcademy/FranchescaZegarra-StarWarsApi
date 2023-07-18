@@ -21,8 +21,8 @@ const Layout = () => {
 		<BrowserRouter basename={basename}>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/character-detail/:uid" element={<CharacterDetail />} />
-				<Route path="/planet-detail" element={<PlanetDetails />} />
+				<Route path="/character-detail/:theid" element={<CharacterDetail />} />
+				<Route path="/planet-detail/:id" element={<PlanetDetails />} />
 				<Route path="*" element={<h1>Not found!</h1>} />
 			</Routes>
 		</BrowserRouter>

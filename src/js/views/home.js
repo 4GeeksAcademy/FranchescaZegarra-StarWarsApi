@@ -14,7 +14,10 @@ export const Home = () => {
 		<div className="container">
 			<NavHeader />
 			<h2>Characters</h2>
-			<ScrollBox>
+			
+			<CharacterCard />
+			
+			{/* <ScrollBox>
 				{
 					context.store.characters.map((element,key)=>{
 						return (
@@ -23,12 +26,10 @@ export const Home = () => {
 					})
 				}
 				
-			</ScrollBox>
+			</ScrollBox> */}
 			<br />
-			<h2>Characters</h2>
-			<ScrollBox>
-				<PlanetCard id={11} />
-			</ScrollBox>			
+			<h2>Planets</h2>
+			<PlanetCard id={11} />
 		</div>
 	)
 };

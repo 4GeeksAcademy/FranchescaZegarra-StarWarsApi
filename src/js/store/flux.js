@@ -4,32 +4,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			characters: [],
-			characterDetails:[],
+			characterDetails:{},
+			planets: [],
+			planetDetails: {}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			seeCharacters: async() => {
-				//const store = getStore();
-				
-				// fetch('https://www.swapi.tech/api/people')
-				// .then(response => { return response.json()})
-				// .then(data=> {
-				// 	setStore({...store, characters: data.results});
-				// })
-				// .catch(error => console.log(error));
+
 				try{
-					const response = await fetch('https://www.swapi.dev/api/people');
+					const response = await fetch('https://swapi.dev/api/people/');
 					const data = await response.json();
-					console.log(data);
+					setStore({characters: data.results});
 				} catch(error){
 					console.log(error);
 				}
 			},
 
-			seeCharacterDetails: (data) => {
-				const store = getStore();
-				store.characterDetails.push(data);
+			seeCharacterDetails: async(id) => {
+				try{
+					const response = await fetch('https://swapi.dev/api/people/'+id);
+					const data = await response.json();
+					setStore({characterDetails: data});
+				} catch(error) {
+					console.log(error);
+				}
 			},
+
+			seePlanets: async() => {
+				try{
+					const response = await fetch('https://swapi.dev/api/planets/');
+					const data = await response.json();
+					setStore({planets: data.results});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+
+			seePlanetDetails: async(id) => {
+				try {
+					const response = await fetch('https://swapi.dev/api/planets/'+id);
+					const data = await response.json();
+					setStore({planetDetails: data})
+				} catch(error) {
+					console.log(error)
+				}
+			},	
 
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
