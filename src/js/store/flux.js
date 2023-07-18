@@ -1,21 +1,37 @@
+import { useEffect } from "react";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			characters: [],
+			characterDetails:{},
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			seeCharacters: () => {
+				const store = getStore();
+				
+				fetch('https://www.swapi.tech/api/people')
+				.then(response => { return response.json()})
+				.then(data=> {
+					setStore({...store, characters: data.results});
+				})
+				.catch(error => console.log(error));
+			},
+
+			seeCharacterDetails: (data) => {
+				const store = getStore();
+				setStore({...store, characterDetails: data});
+				
+				/*fetch(`https://www.swapi.tech/api/people/${id}`)
+				.then(response => { return response.json()})
+				.then(data=> {
+					setStore({...store, characterDetails: data.result});
+				})
+				.catch(error => console.log(error));*/
+
+			},
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
