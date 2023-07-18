@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			characters: [],
-			characterDetails:{},
+			characterDetails:[],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -21,15 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			seeCharacterDetails: (data) => {
 				const store = getStore();
-				setStore({...store, characterDetails: data});
-				
-				/*fetch(`https://www.swapi.tech/api/people/${id}`)
-				.then(response => { return response.json()})
-				.then(data=> {
-					setStore({...store, characterDetails: data.result});
-				})
-				.catch(error => console.log(error));*/
-
+				store.characterDetails.push(data);
 			},
 
 			exampleFunction: () => {

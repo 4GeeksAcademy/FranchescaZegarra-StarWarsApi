@@ -15,18 +15,27 @@ const CharacterCard = ({id}) => {
         fetch(`https://www.swapi.tech/api/people/${id}`)
 		.then(response => { return response.json()})
 		.then(data=> {
-			context.action.seeCharacterDetails(data.result);
+			context.actions.seeCharacterDetails(data.result);
 		})
 		.catch(error => console.log(error))
     }, []);
 
-    console.log(context);
+    //Have the properties of a particular character
+    let characters = context.store.characters;
+    let character = characters.find(character => character.uid==id);
+    
+
+    //Have the Detail properties of a particular characterDetail
+    let charactersDetails = context.store.characterDetails;
+    console.log(charactersDetails);
+    let characterDetail = charactersDetails.find(characterDetail => characterDetail.uid==id);
+    console.log(characterDetail)
 
     return (
         <div className="card">
             <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} className="card-img-top" alt={`character ${id}`} />
             <div className="card-body mx-0">
-                <h5 className="card-title">Tittle here</h5>
+                <h5 className="card-title">{character.name}</h5>
                 <p className="card-text m-0">Gender: </p>
                 <p className="card-text m-0">Hair: </p>
                 <p className="card-text">Eye color: </p>
