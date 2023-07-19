@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import NavHeader from "../component/NavHeader.jsx";
 import { Context } from "../store/appContext.js";
 import { useParams } from "react-router-dom";
+import "../../styles/detailsPages.css";
 
 export const PlanetDetails = () => {
 
@@ -9,23 +10,30 @@ export const PlanetDetails = () => {
     const {store, actions} = useContext(Context);
 
     useEffect( () => {
-        actions.seePlanetDetails(params.id);
+        actions.seeVehicleDetails(params.id);
     }, []);
+
+    const handleImageError = (e) => {
+        e.target.src = "https://cdn.beacons.ai/user_content/Syj5d9h5aueYbMaN6Tn0Tamwm3E2/profile_notmystarwars.png"
+    }
 
     return (
         <>
-            <NavHeader />
+            <NavHeader/>
             <main className="container">
                 <section className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12">
-                        <img className="detail-img" src={`https://starwars-visualguide.com/assets/img/planets/${params.id}.jpg`} alt={`image ${params.theId}`} />  
+                        <img className="detail-img" 
+                        src={`https://starwars-visualguide.com/assets/img/planets/${params.id}.jpg`} 
+                        alt={`image ${params.theId}`} onError={handleImageError}
+                        />  
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
-                        <p>This will have some description soon</p>
+                        <p className="text-white">This will have some description soon</p>
                     </div>
                 </section>
                 <hr className="text-danger"/>
-                <section className="row text-center">
+                <section className="row text-center special-section">
                     <div className="col-lg-2 col-sm-2 col-6 text-danger">
                         <p className="fw-bold m-0">Name</p>
                         <p>{store.planetDetails.name}</p>

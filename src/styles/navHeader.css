@@ -4,3 +4,8 @@
     padding: 0px 4px;
     border-radius: 25%;
 }
+.logo {
+    height: 60px;
+    width: 100px;
+    object-fit: cover;
+}

@@ -1,18 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import ScrollBox from "./ScrollBox.jsx";
+import { Link } from "react-router-dom";
 
-const CharacterCard = () => {
-
-    //To change favorite button color
-
+const VehicleCard =() => {
     const {store, actions} = useContext(Context);
 
-    useEffect(() => {
-        actions.seeCharacters();
-    }, [])
+    useEffect (() => {
+        actions.seeVehicles();
 
+    }, []);
+    
     const addFavorites = (item) => {
         const isFavorite = store.favorites.some(favorite => favorite.name === item.name);
 
@@ -29,28 +27,32 @@ const CharacterCard = () => {
 
     return (
         <ScrollBox>
-                {store.characters.map((item, id) => (
+        {
+            store.vehicles.map((item, id) => (
                 <div key={id} className="card">
-    
-                    <img
-                        src={`https://starwars-visualguide.com/assets/img/characters/${id+1}.jpg`}
-                        className="card-img-top" alt={`character 1`} onError={handleImageError}
-                    />
+                    {<img src={`https://starwars-visualguide.com/assets/img/starships/${id+1}.jpg`} 
+                        className="card-img-top" alt="no image" onError={handleImageError}
+                    /> }
                     <div className="card-body mx-0">
                         <h5 className="card-title">{item.name}</h5>
-                        <p className="card-text m-0">Gender: {item.gender} </p>
-                        <p className="card-text m-0">Hair: {item.hair_color}</p>
-                        <p className="card-text">Eye color: {item.eye_color} </p>
-                        <Link to={`/character-detail/${id+1}`}>
-                            <button href="#" className="btn btn-outline-dark col-6"> Learn more</button>
+                        <div style={{minHeight:"96px"}}>
+                            <p className="card-text m-0">Model: {item.model} </p>
+                            <p className="card-text">Manufacturer: {item.manufacturer} </p> 
+                        </div>
+                        
+                        <Link to={`/vehicle-detail/${id+1}`}>
+                            <button href="#" className="btn btn-outline-primary col-6"> Learn more</button>
                         </Link>
                         <button className="btn btn-outline-dark col offset-md-4" onClick={() => addFavorites(item)}>
                             <i className={`bi bi-suit-heart-fill ${store.favorites.some((favorite) => favorite.name === item.name) ? "text-danger" : ""}`}></i>
                         </button>
                     </div>
-                </div>
-                ))}
-        </ScrollBox>            
+                </div> 
+            ))
+        }   
+        </ScrollBox>
+                      
     );
 };
-export default CharacterCard;
+
+export default VehicleCard;
